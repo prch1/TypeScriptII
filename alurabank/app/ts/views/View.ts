@@ -1,5 +1,4 @@
 
-namespace Views {
 
     export abstract class View<T> {
 
@@ -19,4 +18,3 @@ namespace Views {
     
     }
 
-}

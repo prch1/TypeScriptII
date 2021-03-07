@@ -1,7 +1,6 @@
+import {View} from './View';
 
-namespace Views{
-
-    export class MensagemView extends Views.View<string> {
+    export class MensagemView extends View<string> {
   
         template(model:string) : string {
     
@@ -10,5 +9,5 @@ namespace Views{
     
     }
 
-}
+
 
