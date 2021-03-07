@@ -1,34 +1,38 @@
-class NegociacoesView extends View {
-    template(model) {
-        return `
+var Views;
+(function (Views) {
+    class NegociacoesView extends Views.View {
+        template(model) {
+            return `
 
-         <table class="table table-hover table-bordered">
-            <thead>
-                <tr>
-                    <th>DATA</th>
-                    <th>QUANTIDADE</th>
-                    <th>VALOR</th>
-                    <th>VOLUME</th>
-                </tr>
-            </thead>
+        <table class="table table-hover table-bordered">
+           <thead>
+               <tr>
+                   <th>DATA</th>
+                   <th>QUANTIDADE</th>
+                   <th>VALOR</th>
+                   <th>VOLUME</th>
+               </tr>
+           </thead>
 
-            <tbody>
+           <tbody>
 
-               ${model.paraArray().map(negociacao => `
-                     <tr>
-                       <td>${negociacao.data.getDate()}/${negociacao.data.getMonth() + 1}/${negociacao.data.getFullYear()}</td>
-                       <td>${negociacao.quantidade}</td>
-                       <td>${negociacao.valor}</td>
-                       <td>${negociacao.volume}</td>
-                     </tr>
-                   `).join('')}
+              ${model.paraArray().map(negociacao => `
+                    <tr>
+                      <td>${negociacao.data.getDate()}/${negociacao.data.getMonth() + 1}/${negociacao.data.getFullYear()}</td>
+                      <td>${negociacao.quantidade}</td>
+                      <td>${negociacao.valor}</td>
+                      <td>${negociacao.volume}</td>
+                    </tr>
+                  `).join('')}
 
-            </tbody>
+           </tbody>
 
-            <tfoot>
-            </tfoot>
-        </table>      
-         
-         `;
+           <tfoot>
+           </tfoot>
+       </table>      
+        
+        `;
+        }
     }
-}
+    Views.NegociacoesView = NegociacoesView;
+})(Views || (Views = {}));

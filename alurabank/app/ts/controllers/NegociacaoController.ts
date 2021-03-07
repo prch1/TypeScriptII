@@ -7,8 +7,8 @@ class NegociacaoController
     private  _inputValor : JQuery;
     private  _negociacoes = new Negociacoes(); //funciona dessa forma resumida também;
     //private  _negociacoes : Negociacoes = new Negociacoes(); definir o tipo e instanciar 
-    private _negociacoesView = new NegociacoesView('#negociacoesView');
-    private _mensagemView = new MensagemView('#mensagemView');
+    private _negociacoesView = new Views.NegociacoesView('#negociacoesView');
+    private _mensagemView = new Views.MensagemView('#mensagemView');
 
       //Conversão do tipo muito generico para um bem especifico de forma implicita
 
@@ -29,9 +29,10 @@ class NegociacaoController
 
         const negociacao = new Negociacao
             (
-                     new Date(this._inputData.value.replace(/-/g,',')),
-                     parseInt(this._inputQuantidade.value),
-                     parseFloat(this._inputValor.value)
+                     new Date(this._inputData.val()
+                      .replace(/-/g,',')),
+                     parseInt(this._inputQuantidade.val()),
+                     parseFloat(this._inputValor.val())
             );
 
             this._negociacoes.adiciona(negociacao);

@@ -1,37 +1,41 @@
 
-class NegociacoesView extends View<Negociacoes>{
+namespace Views{
 
-     template(model : Negociacoes): string {
-         return `
+  export class NegociacoesView extends Views.View<Negociacoes>{
 
-         <table class="table table-hover table-bordered">
-            <thead>
-                <tr>
-                    <th>DATA</th>
-                    <th>QUANTIDADE</th>
-                    <th>VALOR</th>
-                    <th>VOLUME</th>
-                </tr>
-            </thead>
+    template(model : Negociacoes): string {
+        return `
 
-            <tbody>
+        <table class="table table-hover table-bordered">
+           <thead>
+               <tr>
+                   <th>DATA</th>
+                   <th>QUANTIDADE</th>
+                   <th>VALOR</th>
+                   <th>VOLUME</th>
+               </tr>
+           </thead>
 
-               ${model.paraArray().map(negociacao => 
-                   `
-                     <tr>
-                       <td>${negociacao.data.getDate()}/${negociacao.data.getMonth()+1}/${negociacao.data.getFullYear()}</td>
-                       <td>${negociacao.quantidade}</td>
-                       <td>${negociacao.valor}</td>
-                       <td>${negociacao.volume}</td>
-                     </tr>
-                   `).join('')}
+           <tbody>
 
-            </tbody>
+              ${model.paraArray().map(negociacao => 
+                  `
+                    <tr>
+                      <td>${negociacao.data.getDate()}/${negociacao.data.getMonth()+1}/${negociacao.data.getFullYear()}</td>
+                      <td>${negociacao.quantidade}</td>
+                      <td>${negociacao.valor}</td>
+                      <td>${negociacao.volume}</td>
+                    </tr>
+                  `).join('')}
 
-            <tfoot>
-            </tfoot>
-        </table>      
-         
-         `
-     }
+           </tbody>
+
+           <tfoot>
+           </tfoot>
+       </table>      
+        
+        `
+    }
+}
+
 }
