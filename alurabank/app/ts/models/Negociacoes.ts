@@ -16,7 +16,11 @@ export class Negociacoes
        //antes de usar programação defensiva
        //return this._negociacoes;
 
-       return [].concat(this._negociacoes); //transferindo dados para um clone do array negociacoes
+       return ([] as Negociacao[]).concat(this._negociacoes); //transferindo dados para um clone do array negociacoes
+       /*o array estava com problema pq o tipo dele não estava definido 
+       com o strictNullChecks ativado essa ação foi necessária
+       então ele está definido com o tipo Negociacao 
+       */
    }
 }
 

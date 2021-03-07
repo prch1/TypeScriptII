@@ -5,7 +5,7 @@
         private _elemento : JQuery;
         private _escapar : boolean;
     
-        constructor(seletor : string, escapar?: boolean)//torna a passagem do parametro opcional para não quebrar a aplicação
+        constructor(seletor : string, escapar: boolean = false)//torna a passagem do parametro opcional para não quebrar a aplicação
                                                         //o tipo passado é null ou undefined = 0 ==false
         {
             this._elemento = $(seletor);

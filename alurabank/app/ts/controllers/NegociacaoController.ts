@@ -28,6 +28,7 @@ export class NegociacaoController
       this._inputValor = $('#valor');
       this._negociacoesView.update(this._negociacoes);
 
+
     }
 
     adiciona(event : Event)
@@ -36,10 +37,17 @@ export class NegociacaoController
        
         //converter as string para o respectivo tipo esperado pelo constructor() de Negociacao.
 
+        let data = new Date(this._inputData.val().replace(/-/g,','));
+
+        if(!this._ehDiaUtil(data))
+        {
+          this._mensagemView.update('Somente negociações em dias uteis!');
+          return
+        }
+
         const negociacao = new Negociacao
             (
-                     new Date(this._inputData.val()
-                      .replace(/-/g,',')),
+                     data,
                      parseInt(this._inputQuantidade.val()),
                      parseFloat(this._inputValor.val())
             );
@@ -62,4 +70,19 @@ export class NegociacaoController
             */
     }
 
+    private _ehDiaUtil(data : Date)
+    {
+        return data.getDay() != DiaDaSemana.Sabado && data.getDay() != DiaDaSemana.Domingo;
+    }
+
+}
+
+enum DiaDaSemana {
+  Domingo,
+  Segunda,
+  Terca,
+  Quarta, 
+  Quinta, 
+  Sexta, 
+  Sabado, 
 }
