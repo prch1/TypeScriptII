@@ -1,4 +1,5 @@
 import {Negociacao} from './Negociacao';
+import {logarTempoDeExecucao} from '../helpers/decorators/index';
 
 export class Negociacoes 
 {
@@ -7,11 +8,13 @@ export class Negociacoes
 
     private _negociacoes : Negociacao[] = [] ;
 
+    @logarTempoDeExecucao()
     adiciona(negociacao : Negociacao){
 
     this._negociacoes.push(negociacao);
    }
 
+   @logarTempoDeExecucao(true)
    paraArray() : Negociacao[]{
        //antes de usar programação defensiva
        //return this._negociacoes;

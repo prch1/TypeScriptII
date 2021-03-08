@@ -1,6 +1,8 @@
 
 import { NegociacoesView, MensagemView} from '../views/index';
 import {Negociacao, Negociacoes} from '../models/index';
+import { domInject } from '../helpers/decorators/index'
+
 /*
 import {Negociacoes} from '../models/Negociacoes';
 import {Negociacao} from '../models/Negociacao';
@@ -10,10 +12,13 @@ import {MensagemView} from '../views/MensagemView';
 
 export class NegociacaoController
 {
-
+    @domInject('#data')  
     private  _inputData : JQuery;
+    @domInject('#quantidade')
     private  _inputQuantidade : JQuery;
+    @domInject('#valor')
     private  _inputValor : JQuery;
+   
     private  _negociacoes = new Negociacoes(); //funciona dessa forma resumida também;
     //private  _negociacoes : Negociacoes = new Negociacoes(); definir o tipo e instanciar 
     private _negociacoesView = new NegociacoesView('#negociacoesView');
@@ -23,18 +28,13 @@ export class NegociacaoController
 
     constructor()
     {
-      this._inputData = $('#data');
-      this._inputQuantidade = $('#quantidade');
-      this._inputValor = $('#valor');
       this._negociacoesView.update(this._negociacoes);
-
-
     }
 
     adiciona(event : Event)
     {
         event.preventDefault();
-       
+   
         //converter as string para o respectivo tipo esperado pelo constructor() de Negociacao.
 
         let data = new Date(this._inputData.val().replace(/-/g,','));
@@ -56,7 +56,7 @@ export class NegociacaoController
             this._negociacoesView.update(this._negociacoes);
             this._mensagemView.update('Negociação adicionada');
 
-
+    
            /*
             //console.log(this._negociacoes.paraArray()); exibir tudo de uma vez
 
@@ -69,6 +69,7 @@ export class NegociacaoController
             });
             */
     }
+
 
     private _ehDiaUtil(data : Date)
     {
