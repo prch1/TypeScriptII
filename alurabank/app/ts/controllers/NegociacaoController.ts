@@ -56,7 +56,6 @@ export class NegociacaoController
             this._negociacoesView.update(this._negociacoes);
             this._mensagemView.update('Negociação adicionada');
 
-    
            /*
             //console.log(this._negociacoes.paraArray()); exibir tudo de uma vez
 
@@ -68,6 +67,31 @@ export class NegociacaoController
                 console.log(negociacao.valor);
             });
             */
+    }
+
+    importarDados()
+    {  
+       function isOK(res: Response)
+       {
+           if(res.ok)
+           {
+             return res;
+           } else
+           {
+              throw new Error(res.statusText);
+           }
+       }
+
+       fetch('http://localhost:8088/dados')
+       .then(res => isOK(res))
+       .then(res => res.json())
+       .then((dados : any[]) => {
+                    dados
+                    .map(dado => new Negociacao(new Date(), dado.vezes, dado.montante))
+                    .forEach(negociacao => this._negociacoes.adiciona(negociacao));
+                    this._negociacoesView.update(this._negociacoes);
+       })
+       .catch(err => console.log(err.message));
     }
 
 
