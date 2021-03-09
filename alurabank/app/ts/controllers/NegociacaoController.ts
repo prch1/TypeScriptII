@@ -3,6 +3,7 @@ import { NegociacoesView, MensagemView} from '../views/index';
 import {Negociacao, Negociacoes} from '../models/index';
 import { domInject, throttle } from '../helpers/decorators/index'
 import { NegociacaoParcial } from '../models/NegociacaoParcial';
+import {NegociacaoService, ResponseHandler} from '../services/index';
 
 /*
 import {Negociacoes} from '../models/Negociacoes';
@@ -26,6 +27,7 @@ export class NegociacaoController
     //private  _negociacoes : Negociacoes = new Negociacoes(); definir o tipo e instanciar 
     private _negociacoesView = new NegociacoesView('#negociacoesView');
     private _mensagemView = new MensagemView('#mensagemView');
+    private _service = new NegociacaoService();
 
       //Conversão do tipo muito generico para um bem especifico de forma implicita
 
@@ -74,7 +76,13 @@ export class NegociacaoController
     @throttle()
     importarDados()
     {  
-       function isOK(res: Response)
+       
+      const isOk : ResponseHandler = (res : Response) => {
+          if(res.ok) return res;
+          throw new Error(res.statusText);
+      }
+      
+      /*function isOK(res: Response)
        {
            if(res.ok)
            {
@@ -83,22 +91,18 @@ export class NegociacaoController
            {
               throw new Error(res.statusText);
            }
-       }
+       }*/
 
       // clearTimeout(timer)
       // timer = setTimeout(() => {
 
-        fetch('http://localhost:8088/dados')
-        .then(res => isOK(res))
-        .then(res => res.json())
-        .then((dados : NegociacaoParcial[]) => {
-                     dados
-                     .map(dado => new Negociacao(new Date(), dado.vezes, dado.montante))
-                     .forEach(negociacao => this._negociacoes.adiciona(negociacao));
-                     this._negociacoesView.update(this._negociacoes);
-        })
-        .catch(err => console.log(err.message));
-
+      this._service
+        .obterNegociacoes(isOk)
+        .then(negociacoes => {
+              negociacoes.forEach(negociacao => 
+                this._negociacoes.adiciona(negociacao));
+                this._negociacoesView.update(this._negociacoes);
+              });
       // }, 500);
 
     }
