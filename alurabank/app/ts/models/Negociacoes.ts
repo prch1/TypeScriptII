@@ -1,7 +1,8 @@
 import {Negociacao} from './Negociacao';
 import {logarTempoDeExecucao} from '../helpers/decorators/index';
+import {Imprimivel} from './Imprimivel';
 
-export class Negociacoes 
+export class Negociacoes extends Imprimivel
 {
     //forma de declarar o array
     // private _negociacoes : Array<Negociacao> =[]; 

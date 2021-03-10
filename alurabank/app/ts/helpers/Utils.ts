@@ -1,7 +1,7 @@
-import {Negociacao, Negociacoes} from '../models/index';
+import {Imprimivel, Negociacao, Negociacoes} from '../models/index';
 
 
-export function imprime(...objetos:any[])
+export function imprime(...objetos:Imprimivel[])
 {
     objetos.forEach(objeto => objeto.paraTexto());
 }

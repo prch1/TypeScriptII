@@ -1,4 +1,7 @@
-export class Negociacao
+import {Imprimivel} from './Imprimivel';
+
+
+export class Negociacao extends Imprimivel
 {
      
    /*  Escrita tradicional
@@ -18,9 +21,8 @@ export class Negociacao
             readonly data : Date,
             readonly quantidade : number,
             readonly valor : number
-        ) {}
+        ) { super(); }
 
-      
         get volume(){
             return this.quantidade * this.valor;
         }
