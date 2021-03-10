@@ -25,5 +25,11 @@ export class Negociacoes
        então ele está definido com o tipo Negociacao 
        */
    }
+
+    paraTexto() : void {
+        console.log('-- paraTexto --');
+        console.log(JSON.stringify(this._negociacoes));
+    }
+
 }
 

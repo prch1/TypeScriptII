@@ -1,4 +1,4 @@
-System.register(["./logarTempoDeExecucao"], function (exports_1, context_1) {
+System.register(["./Utils"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     function exportStar_1(m) {
@@ -10,8 +10,8 @@ System.register(["./logarTempoDeExecucao"], function (exports_1, context_1) {
     }
     return {
         setters: [
-            function (logarTempoDeExecucao_1_1) {
-                exportStar_1(logarTempoDeExecucao_1_1);
+            function (Utils_1_1) {
+                exportStar_1(Utils_1_1);
             }
         ],
         execute: function () {

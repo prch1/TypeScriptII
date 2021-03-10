@@ -1,9 +1,10 @@
 
 import { NegociacoesView, MensagemView} from '../views/index';
-import {Negociacao, Negociacoes} from '../models/index';
-import { domInject, throttle } from '../helpers/decorators/index'
-import { NegociacaoParcial } from '../models/NegociacaoParcial';
+import {Negociacao, Negociacoes, NegociacaoParcial} from '../models/index';
+import { domInject, throttle } from '../helpers/decorators/index';
 import {NegociacaoService, ResponseHandler} from '../services/index';
+import {imprime} from '../helpers/index';
+
 
 /*
 import {Negociacoes} from '../models/Negociacoes';
@@ -59,6 +60,8 @@ export class NegociacaoController
             this._negociacoes.adiciona(negociacao);
             this._negociacoesView.update(this._negociacoes);
             this._mensagemView.update('Negociação adicionada');
+
+            imprime(negociacao, this._negociacoes);
 
            /*
             //console.log(this._negociacoes.paraArray()); exibir tudo de uma vez

@@ -25,4 +25,15 @@ export class Negociacao
             return this.quantidade * this.valor;
         }
 
+        paraTexto() : void {
+
+                console.log('-- paraTexto --');
+                console.log(
+                    `Data: ${this.data}
+                    Quantidade: ${this.quantidade}, 
+                    Valor: ${this.valor}, 
+                    Volume: ${this.volume}`
+                );
+         }
+
 }
