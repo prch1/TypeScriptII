@@ -1,7 +1,10 @@
+import { Igualavel } from './Igualavel';
 import {Imprimivel} from './Imprimivel';
+import { Negociacoes } from './Negociacoes';
+import {MeuObjeto} from './index';
 
 
-export class Negociacao implements Imprimivel
+export class Negociacao implements MeuObjeto<Negociacao>
 {
      
    /*  Escrita tradicional
@@ -38,4 +41,14 @@ export class Negociacao implements Imprimivel
                 );
          }
 
+         ehIgual(negociacao : Negociacao) : boolean
+         {
+             return this.data.getDate() == negociacao.data.getDate()
+                && this.data.getMonth() == negociacao.data.getMonth()
+                && this.data.getFullYear() == negociacao.data.getFullYear();
+         }
+
 }
+
+
+

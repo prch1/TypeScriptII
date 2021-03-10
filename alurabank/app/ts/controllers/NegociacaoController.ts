@@ -76,6 +76,8 @@ export class NegociacaoController
             */
     }
 
+    /*
+
     @throttle()
     importarDados()
     {  
@@ -85,16 +87,16 @@ export class NegociacaoController
           throw new Error(res.statusText);
       }
       
-      /*function isOK(res: Response)
-       {
-           if(res.ok)
-           {
-             return res;
-           } else
-           {
-              throw new Error(res.statusText);
-           }
-       }*/
+     // function isOK(res: Response)
+      // {
+          // if(res.ok)
+          // {
+          //   return res;
+          // } else
+          // {
+          //    throw new Error(res.statusText);
+         //  }
+       //}
 
       // clearTimeout(timer)
       // timer = setTimeout(() => {
@@ -109,6 +111,62 @@ export class NegociacaoController
       // }, 500);
 
     }
+    */
+    @throttle()
+    importaDados()
+    {
+        this._service
+           .obterNegociacoes((res :Response)=> {
+             
+           if(res.ok)
+           {
+             return res;
+           } else
+           {
+             throw new Error(res.statusText);
+           }
+        })
+        .then(negociacoesParaImportar => {
+            const negociacoesJaImportadas = this._negociacoes.paraArray();
+
+            negociacoesParaImportar
+              .filter(negociacao => 
+                  !negociacoesJaImportadas.some(jaImportadas => 
+                  negociacao.ehIgual(jaImportadas)))
+                  .forEach(negociacao =>
+                     this._negociacoes.adiciona(negociacao));
+
+                  this._negociacoesView.update(this._negociacoes);
+        });
+    }
+
+
+   /* @throttle()
+    importaDados() {
+
+        this._service
+            .obterNegociacoes((res : Response) => {
+
+                if(res.ok) {
+                    return res;
+                } else {
+                    throw new Error(res.statusText);
+                }
+            })
+            .then(negociacoesParaImportar => {
+
+                const negociacoesJaImportadas = this._negociacoes.paraArray();
+
+                negociacoesParaImportar
+                    .filter(negociacao => 
+                        !negociacoesJaImportadas.some(jaImportada => 
+                            negociacao.ehIgual(jaImportada)))
+                    .forEach(negociacao => 
+                    this._negociacoes.adiciona(negociacao));
+
+                this._negociacoesView.update(this._negociacoes);
+            });
+    }*/
 
 
     private _ehDiaUtil(data : Date)

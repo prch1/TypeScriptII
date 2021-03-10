@@ -47,16 +47,21 @@ System.register(["../views/index", "../models/index", "../helpers/decorators/ind
                     this._mensagemView.update('Negociação adicionada');
                     index_5.imprime(negociacao, this._negociacoes);
                 }
-                importarDados() {
-                    const isOk = (res) => {
-                        if (res.ok)
-                            return res;
-                        throw new Error(res.statusText);
-                    };
+                importaDados() {
                     this._service
-                        .obterNegociacoes(isOk)
-                        .then(negociacoes => {
-                        negociacoes.forEach(negociacao => this._negociacoes.adiciona(negociacao));
+                        .obterNegociacoes((res) => {
+                        if (res.ok) {
+                            return res;
+                        }
+                        else {
+                            throw new Error(res.statusText);
+                        }
+                    })
+                        .then(negociacoesParaImportar => {
+                        const negociacoesJaImportadas = this._negociacoes.paraArray();
+                        negociacoesParaImportar
+                            .filter(negociacao => !negociacoesJaImportadas.some(jaImportadas => negociacao.ehIgual(jaImportadas)))
+                            .forEach(negociacao => this._negociacoes.adiciona(negociacao));
                         this._negociacoesView.update(this._negociacoes);
                     });
                 }
@@ -78,7 +83,7 @@ System.register(["../views/index", "../models/index", "../helpers/decorators/ind
             ], NegociacaoController.prototype, "adiciona", null);
             __decorate([
                 index_3.throttle()
-            ], NegociacaoController.prototype, "importarDados", null);
+            ], NegociacaoController.prototype, "importaDados", null);
             exports_1("NegociacaoController", NegociacaoController);
             (function (DiaDaSemana) {
                 DiaDaSemana[DiaDaSemana["Domingo"] = 0] = "Domingo";

@@ -3,7 +3,7 @@ import {NegociacaoController} from './controllers/NegociacaoController';
 const controller = new NegociacaoController();
 
 $('.form').submit(controller.adiciona.bind(controller));
-$('#botao-importa').click(controller.importarDados.bind(controller));
+$('#botao-importa').click(controller.importaDados.bind(controller));
 
     //bibliotecas tsd  https://github.com/DefinitelyTyped/DefinitelyTyped.
 
